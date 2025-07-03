@@ -21,7 +21,7 @@ type Pong struct {
 type ServerInterface interface {
 
 	// (GET /ping/{user_id})
-	GetPingUserId(w http.ResponseWriter, r *http.Request, userId string)
+	GetPingUserID(w http.ResponseWriter, r *http.Request, userID string)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -33,22 +33,22 @@ type ServerInterfaceWrapper struct {
 
 type MiddlewareFunc func(http.Handler) http.Handler
 
-// GetPingUserId operation middleware
-func (siw *ServerInterfaceWrapper) GetPingUserId(w http.ResponseWriter, r *http.Request) {
+// GetPingUserID operation middleware
+func (siw *ServerInterfaceWrapper) GetPingUserID(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 
 	// ------------- Path parameter "user_id" -------------
-	var userId string
+	var userID string
 
-	err = runtime.BindStyledParameterWithOptions("simple", "user_id", r.PathValue("user_id"), &userId, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	err = runtime.BindStyledParameterWithOptions("simple", "user_id", r.PathValue("user_id"), &userID, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
 	if err != nil {
 		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "user_id", Err: err})
 		return
 	}
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.GetPingUserId(w, r, userId)
+		siw.Handler.GetPingUserID(w, r, userID)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -178,7 +178,7 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 		ErrorHandlerFunc:   options.ErrorHandlerFunc,
 	}
 
-	m.HandleFunc("GET "+options.BaseURL+"/ping/{user_id}", wrapper.GetPingUserId)
+	m.HandleFunc("GET "+options.BaseURL+"/ping/{user_id}", wrapper.GetPingUserID)
 
 	return m
 }

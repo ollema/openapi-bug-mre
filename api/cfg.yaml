@@ -3,3 +3,5 @@ output: ping.gen.go
 generate:
   models: true
   std-http-server: true
+output-options:
+  name-normalizer: ToCamelCaseWithInitialisms

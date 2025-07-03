@@ -14,10 +14,10 @@ func NewServer() Server {
 	return Server{}
 }
 
-// (GET /ping/{userId})
-func (Server) GetPingUserId(w http.ResponseWriter, r *http.Request, userId string) {
+// (GET /ping/{userID})
+func (Server) GetPingUserID(w http.ResponseWriter, r *http.Request, userID string) {
 	resp := Pong{
-		Ping: "Hello, " + userId + "!",
+		Ping: "Hello, " + userID + "!",
 	}
 
 	w.WriteHeader(http.StatusOK)
