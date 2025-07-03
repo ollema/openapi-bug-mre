@@ -18,8 +18,9 @@ func NewServer() Server {
 
 // GetPingUserID handles the GET /ping/{userID} endpoint.
 func (Server) GetPingUserID(w http.ResponseWriter, _ *http.Request, userID string) {
-	resp := Pong{
-		Ping: "Hello, " + userID + "!",
+	resp := PingResponse{
+		Message: "Hello, " + userID + "!",
+		UserID:  userID,
 	}
 
 	w.WriteHeader(http.StatusOK)

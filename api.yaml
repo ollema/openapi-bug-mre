@@ -14,19 +14,22 @@ paths:
           description: User ID for greeting
       responses:
         '200':
-          description: pet response
+          description: ping response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pong'
+                $ref: '#/components/schemas/PingResponse'
 components:
   schemas:
-    # base types
-    Pong:
+    PingResponse:
       type: object
       required:
-        - ping
+        - message
+        - user_id
       properties:
-        ping:
+        message:
           type: string
-          example: pong
+          example: "Hello, user123!"
+        user_id:
+          type: string
+          example: "user123"

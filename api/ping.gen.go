@@ -12,9 +12,10 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-// Pong defines model for Pong.
-type Pong struct {
-	Ping string `json:"ping"`
+// PingResponse defines model for PingResponse.
+type PingResponse struct {
+	Message string `json:"message"`
+	UserID  string `json:"user_id"`
 }
 
 // ServerInterface represents all server handlers.
