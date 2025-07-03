@@ -1,3 +1,4 @@
+// Package main provides the OpenAPI server implementation.
 package main
 
 import (
