@@ -3,10 +3,10 @@ info:
   version: 1.0.0
   title: Minimal ping API server
 paths:
-  /ping/{userId}:
+  /ping/{user_id}:
     get:
       parameters:
-        - name: userId
+        - name: user_id
           in: path
           required: true
           schema:
